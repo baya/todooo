@@ -6,7 +6,8 @@ gem 'sqlite3'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 group :test, :development do
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 3.0.0'
+  gem 'database_cleaner'
 end
 
 
