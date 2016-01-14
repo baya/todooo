@@ -8,7 +8,9 @@ class CreateEvents < ActiveRecord::Migration
       t.string     :resource_type
       t.string     :action
       t.integer    :old_assigned_user_id
+      t.integer    :new_assigned_user_id
       t.date       :old_deadlines
+      t.date       :new_deadlines
 
       t.timestamps
     end
