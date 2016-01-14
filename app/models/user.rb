@@ -9,5 +9,6 @@ class User < ActiveRecord::Base
   has_many :projects, through: :accesses
   has_many :todos
   has_and_belongs_to_many :teams
+  has_many :events
   
 end

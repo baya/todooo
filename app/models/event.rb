@@ -18,13 +18,16 @@ class Event < ActiveRecord::Base
                        :praise_comment,   # 赞了评论
                        :delete_comment,   # 删除了回复
                        :delete_todo,      # 删除了任务
-                       :restore_todo,     # 恢复了任务
+                       :recover_todo,     # 恢复了任务
                        :create_schedule,  # 创建日程
                        :edit_schedule,    # 编辑日程
                        :delete_schedule   # 删除日程
-                      ].freeze
+                      ].map(&:to_s).freeze
   
   belongs_to :source, polymorphic: true
   belongs_to :resource, polymorphic: true
+  belongs_to :user
+
+  validates :action, inclusion: {in: VALID_ACTION_LIST}
 
 end

@@ -7,7 +7,7 @@ class CreateTodos < ActiveRecord::Migration
       t.integer    :assigned_user_id
       t.integer    :state
       t.date       :deadlines
-      t.string     :content, limit: 1000       
+      t.text       :content
       t.timestamps
     end
   end
