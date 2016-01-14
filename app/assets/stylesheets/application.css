@@ -13,3 +13,82 @@
  *= require_tree .
  *= require_self
  */
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, input, textarea, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+body {
+    font-family: "Helvetica Neue", "Hiragino Sans GB", "冬青黑体", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    background-color: #f2f5e9;
+}
+
+a {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+ol, ul {
+    list-style: none;
+    list-style-image: none;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    width: 960px;
+    margin: 20px auto;
+    height: 30px;
+}
+
+.header .logo .name {
+    display: inline-block;
+    max-width: 10em;
+    font-family: Bodoni, Verdana, Helvetica, Arial;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.simple-stack {
+    position: relative;
+    width: 962px;
+    margin: 0 auto;
+}
+
+.simple-stack .page {
+    width: 100%;
+    min-height: 600px;
+    border: 1px solid #dbdfd6;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+    background: #fff;
+    position: relative;
+}
+
+.header .logo {
+    float: left;
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 30px;
+}
+
+.header .nav {
+    float: left;
+    margin-left: 30px;
+}
+
+.header .nav li {
+    float: left;
+    margin: 0 15px;
+}
+
+
+
