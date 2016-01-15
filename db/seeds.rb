@@ -23,3 +23,10 @@ team.members << users
 project = creator.created_projects.create(team: team, name: '做好吃的')
 project.members << users
 
+
+# create todo
+
+CreateTodoService.new(user: users[0],
+                      project: project,
+                      content: '辣椒炒肉'
+                      ).call

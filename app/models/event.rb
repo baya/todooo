@@ -23,10 +23,15 @@ class Event < ActiveRecord::Base
                        :edit_schedule,    # 编辑日程
                        :delete_schedule   # 删除日程
                       ].map(&:to_s).freeze
-  
+
+  # 事件发生时所属的源，比如 project, todo, 日程等
   belongs_to :source, polymorphic: true
+
+  # 事件所属的资源，比如 team, project, calendar
   belongs_to :resource, polymorphic: true
+  
   belongs_to :user
+  belongs_to :team
 
   validates :action, inclusion: {in: VALID_ACTION_LIST}
 

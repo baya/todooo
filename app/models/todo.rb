@@ -12,7 +12,7 @@ class Todo < ActiveRecord::Base
   belongs_to :creator, foreign_key: 'creator_id', class_name: 'User'
   belongs_to :assigned_user, foreign_key: 'assigned_user_id', class_name: 'User'
   belongs_to :project
-  has_many :source_events, as: :source
+  has_many :source_events, as: :source, class_name: 'Event'
 
   validates :content, presence: true, length: { maximum: 1000 }
   

@@ -9,6 +9,7 @@ class CreateTodoService
     @project   = data[:project]
     @todo_list = data[:todo_list]
     @state     = STATE.fetch(:init)
+    @team      = @project.team
   end
 
   def call
@@ -22,15 +23,17 @@ class CreateTodoService
     Todo.create!(creator: @user,
                  project: @project,
                  state:   @state,
-                 content: @content
+                 content: @content,
                  )
   end
 
   def create_event(todo)
-    todo.source_events.create!(user:     @user,
-                              resource: @project,
-                              action:   ACTION
-                              )
+    Event.create!(user:     @user,
+                  action:   ACTION,
+                  team:     @team,
+                  source:   todo,
+                  resource: @project,
+                  )
   end
 
   def transaction(&block)
