@@ -1,17 +1,27 @@
 <div class="page page-root">
-  <div class="page-inner">
+  <div class="page-inner" id="page-events">
     <% @days.each do |day| %>
       <div class="events-day">
-        <h3><%= day %></h3>
+	<% pday = PrettyDay.new(day) %>
+        <h4 class="events-day-title">
+	  <% if pday.is_t_y? %>
+	    <%= pday.cn_t_y %>
+	  <% else %>
+	    <span class="date"><%= pday.month_day %></span>
+	    <span class="day"><%= pday.cn_week %></span>
+	  <% end %>
+	</h4>
 	<% cates = @event_group[day] %>
-	<% cates.each do |cate| %>
-	  <div class="events-ancestor">
-	    <%= link_to  cate.name, cate.link_path(@team) %>
-	    <% cate.items.each do |item| %>
-	      <%= render item.action, item: item %>
-	    <% end %>
-	  </div>
-	<% end %>
+	<div class="events-day-content">
+	  <% cates.each do |cate| %>
+	    <div class="events-ancestor">
+	      <h5 class="events-ancestor-title"><%= link_to  cate.name, cate.link_path(@team) %></h5>
+	      <% cate.items.each do |item| %>
+		<%= render item.action, item: item %>
+	      <% end %>
+	    </div>
+	  <% end %>
+	</div>
       </div>
     <% end %>
   </div>

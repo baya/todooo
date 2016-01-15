@@ -91,4 +91,31 @@ ol, ul {
 }
 
 
+#page-events .events-ancestor {
+    position: relative;
+    padding: 30px 100px 10px 0;
+    border-top: 1px solid #d2e8ea;
+}
+
+#page-events .events-ancestor-title {
+    position: absolute;
+    top: -11px;
+    right: 0;
+    padding: 0 5px 0 15px;
+    font-size: 18px;
+    line-height: 18px;
+    background-color: #fff;
+}
+
+#page-events .event {
+    position: relative;
+    margin: 0 0 30px 0;
+    padding: 0 0 0 55px;
+    min-height: 45px;
+    font-size: 14px;
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: break-word;
+    line-height: 1.5;
+}
 
