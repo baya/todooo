@@ -6,7 +6,7 @@
 	<% cates = @event_group[day] %>
 	<% cates.each do |cate| %>
 	  <div class="events-ancestor">
-	    <%= link_to  cate.name, cate.link_path %>
+	    <%= link_to  cate.name, cate.link_path(@team) %>
 	    <% cate.items.each do |item| %>
 	      <div class="event">
 		<a href="#event-<%= item.event_id %>" class="event-created-at"><%= item.created_hm %></a>

@@ -43,13 +43,10 @@ class EventCategory
     end
   end
 
-  def link_path
-    # for-debug
-    return ''
-    
+  def link_path(team)
     if @link_path.nil?
-      path = "#{resouce}_path"
-      URL_HELPER.send(path, id)
+      path = "team_#{resouce}_path"
+      @link_path = URL_HELPER.send(path, team.id, id)
     end
 
     @link_path

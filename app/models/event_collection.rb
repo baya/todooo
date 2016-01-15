@@ -6,9 +6,7 @@ class EventCollection
   def self.create(params = {})
     sql  = build_sql(params)
     list = run_sql(sql)
-    Rails.logger.info("+++++++++#{list.inspect}")
     list = list.map{|attrs|
-      Rails.logger.info("???????????????#{attrs.inspect}")
       EventItem.new(attrs)
     }
     new(list)
