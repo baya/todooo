@@ -10,10 +10,10 @@
   <div class="wrapper">
     <div class="header">
       <h1 class="logo">
-	<span class="name"><a><%= @team.name %></a></span>
+	<span class="name"><a><%= current_team.name %></a></span>
       </h1>
       <ul class="nav">
-	<li id="nav-events"><%= link_to '动态', team_events_path(@team.id) %></li>
+	<li id="nav-events"><%= link_to '动态', team_events_path(current_team.id) %></li>
       </ul>
     </div>
     <div class="container workspace simple-stack">

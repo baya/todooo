@@ -3,4 +3,11 @@ Rails.application.routes.draw do
     resources :events
     resources :projects
   end
+
+  resources :members
+
+  scope '/projects/:project_id' do
+    resources :todos
+  end
+  
 end

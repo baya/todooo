@@ -8,15 +8,7 @@
 	  <div class="events-ancestor">
 	    <%= link_to  cate.name, cate.link_path(@team) %>
 	    <% cate.items.each do |item| %>
-	      <div class="event">
-		<a href="#event-<%= item.event_id %>" class="event-created-at"><%= item.created_hm %></a>
-		<span class="event-actor">
-		  <%= link_to item.user_name, '' %>
-		</span>
-		<span class="event-action">
-		  
-		</span>
-	      </div>
+	      <%= render item.action, item: item %>
 	    <% end %>
 	  </div>
 	<% end %>

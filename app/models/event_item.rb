@@ -1,4 +1,6 @@
 class EventItem
+
+  URL_HELPER = Rails.application.routes.url_helpers
   
   ATTRS = [
            :event_id,
@@ -59,6 +61,10 @@ class EventItem
 
   def created_hm
     created_at.strftime('%H:%M')
+  end
+
+  def todo_path
+    URL_HELPER.todo_path(r_proj_id, todo_id)
   end
 
   

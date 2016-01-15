@@ -34,5 +34,6 @@ class Event < ActiveRecord::Base
   belongs_to :team
 
   validates :action, inclusion: {in: VALID_ACTION_LIST}
+  validates :action, presence: true
 
 end
