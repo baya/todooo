@@ -89,3 +89,22 @@ EditAssignTodoService.new(user: users[0],
                           new_assigned_user: users[3],
                           todo: todo
                           ).call
+
+# edit todo deadlines
+
+todo = CreateTodoService.new(user: users[0],
+                             project: project,
+                             content: '铺好桌子，摆好餐具'
+                             ).call
+
+
+AssignTodoService.new(user: users[1],
+                      assigned_user: users[4],
+                      todo: todo
+                      ).call
+
+deadlines = (DateTime.now + 1.day).strftime('%Y-%m-%d')
+EditTodoDeadlinesService.new(user: users[1],
+                          todo: todo,
+                          new_deadlines: deadlines
+                          ).call

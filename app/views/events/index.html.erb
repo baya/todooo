@@ -4,8 +4,8 @@
       <div class="events-day">
 	<% pday = PrettyDay.new(day) %>
         <h4 class="events-day-title">
-	  <% if pday.is_t_y? %>
-	    <%= pday.cn_t_y %>
+	  <% if pday.is_tty? %>
+	    <%= pday.cn_tty %>
 	  <% else %>
 	    <span class="date"><%= pday.month_day %></span>
 	    <span class="day"><%= pday.cn_week %></span>
@@ -20,7 +20,7 @@
 		<% begin %>
 		  <%= render item.action, item: item %>
 		<% rescue ActionView::MissingTemplate => e %>
-		<p><%= "#{e.class}: #{e.message[0..15]}" %></p>
+		<p><%= show_missing_partial(e) %></p>
 		<% end %>
 	      <% end %>
 	    </div>

@@ -1,0 +1,8 @@
+<div class="event">
+  <a href="#event-<%= item.event_id %>" class="event-created-at"><%= item.created_hm %></a>
+  <span class="event-actor">
+    <%= link_to item.user_name, member_path(item.user_id) %>
+  </span>
+  <span class="event-action"> 将任务完成时间从 <%= item.pretty_old_deadlines %> 修改为 <%= item.pretty_new_deadlines %>:  </span>
+  <span class="event-text"><%= link_to item.todo_content, item.todo_path %></span>
+</div>

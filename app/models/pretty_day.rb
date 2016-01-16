@@ -13,11 +13,13 @@ class PrettyDay
     'Sun' => '周日'
   }.freeze
 
+  CN_TMDAY = '明'.freeze
   CN_TODAY = '今'.freeze
   CN_YTDAY = '昨'.freeze
 
   def initialize(day)
     @day = day.to_date
+    @dt  = DateTime.now
   end
 
   def cn_week
@@ -29,24 +31,54 @@ class PrettyDay
   end
 
   def is_today?
-    @day == DateTime.now.to_date
+    @day == @dt.to_date
   end
 
   def is_yesterday?
-    @day == DateTime.now.yesterday.to_date
+    @day == @dt.yesterday.to_date
   end
 
-  def is_t_y?
-    is_today? || is_yesterday?
+  def is_tomorrow?
+    @day == @dt.tomorrow.to_date
   end
 
-  def cn_t_y
+  def is_tty?
+    is_today? || is_tomorrow? || is_yesterday?
+  end
+
+  def cn_tty
     if is_today?
       CN_TODAY
     elsif is_yesterday?
       CN_YTDAY
+    elsif is_tomorrow?
+      CN_TMDAY
     else
       raise InvalidTYDay
+    end
+  end
+
+  def cn_tty_long
+    [cn_tty, '天'].join('')
+  end
+
+  def is_in_week?
+    @day.strftime('%V') == @dt.strftime('%V')
+  end
+
+  def is_in_year?
+    @day.strftime('%Y') == @dt.strftime('%Y')
+  end
+
+  def to_deadlines
+    if is_tty?
+      cn_tty_long
+    elsif is_in_week?
+      ['本', cn_week].join
+    elsif is_in_year?
+      @day.strftime('%-m月%-d日')
+    else
+      @day.strftime('%Y年%-m月-%d日')
     end
   end
 

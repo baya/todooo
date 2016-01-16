@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class EventItem
 
   URL_HELPER = Rails.application.routes.url_helpers
@@ -66,6 +67,22 @@ class EventItem
 
   def todo_path
     URL_HELPER.todo_path(r_proj_id, todo_id)
+  end
+
+  def pretty_old_deadlines
+    pretty_deadlines(old_deadlines)
+  end
+
+  def pretty_new_deadlines
+    pretty_deadlines(new_deadlines)
+  end
+
+  def pretty_deadlines(date = nil)
+    if date.blank?
+      '没有截止日期'
+    else
+      PrettyDay.new(date).to_deadlines
+    end
   end
 
   
