@@ -6,9 +6,7 @@ class EventCollection
   def self.create(params = {})
     sql  = build_sql(params)
     list = run_sql(sql)
-    list = list.map{|attrs|
-      EventItem.new(attrs)
-    }
+    list = list.map{|attrs| EventItem.new(attrs) }
     new(list)
   end
 
@@ -92,7 +90,9 @@ class EventCollection
   
   # 容器的结构:
   # {
-  #   date => [category1, category_id2, ...] ]
+  #   date0 => [category01, category02, ...],
+  #   date1 => [category11, category12, ...],
+  #   ...
   # }
   def push_to_container(data, item)
     day = item.created_date

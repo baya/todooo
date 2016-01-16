@@ -30,3 +30,15 @@ CreateTodoService.new(user: users[0],
                       project: project,
                       content: '辣椒炒肉'
                       ).call
+
+
+# delete todo
+
+todo = CreateTodoService.new(user: users[1],
+                             project: project,
+                             content: '洗菜，洗锅，切菜'
+                             ).call
+
+DeleteTodoService.new(user: users[2],
+                      todo: todo
+                      ).call

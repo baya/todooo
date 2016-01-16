@@ -32,7 +32,7 @@ class EventCategory
   end
 
   def last_created_at
-    @items.sort_by(&:created_at).last.try(:created_at)
+    @items.sort_by(&:created_at).first.try(:created_at)
   end
 
   def more_last_than?(item)
