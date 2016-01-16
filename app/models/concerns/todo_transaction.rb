@@ -5,8 +5,9 @@ module TodoTransaction
   InvalidStateError = Class.new(StandardError)
 
   OP_MAP = {
-    complete: '完成',
-    assign:   '分配'
+    complete:    '完成',
+    assign:      '分配',
+    edit_assign: '修改分配'
   }
 
   private

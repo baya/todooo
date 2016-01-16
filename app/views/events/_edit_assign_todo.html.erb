@@ -1,0 +1,8 @@
+<div class="event">
+  <a href="#event-<%= item.event_id %>" class="event-created-at"><%= item.created_hm %></a>
+  <span class="event-actor">
+    <%= link_to item.user_name, member_path(item.user_id) %>
+  </span>
+  <span class="event-action"> 把 <%= item.old_u_name %> 的任务指派给 <%= item.new_u_name %>:  </span>
+  <span class="event-text"><%= link_to item.todo_content, item.todo_path %></span>
+</div>

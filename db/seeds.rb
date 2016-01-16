@@ -69,3 +69,23 @@ AssignTodoService.new(user: users[3],
                       assigned_user: users[4],
                       todo: todo
                       ).call
+
+
+# edit assign todo
+
+todo = CreateTodoService.new(user: users[4],
+                             project: project,
+                             content: '掌握火候'
+                             ).call
+
+
+AssignTodoService.new(user: users[4],
+                      assigned_user: users[1],
+                      todo: todo
+                      ).call
+
+
+EditAssignTodoService.new(user: users[0],
+                          new_assigned_user: users[3],
+                          todo: todo
+                          ).call
