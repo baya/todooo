@@ -42,3 +42,15 @@ todo = CreateTodoService.new(user: users[1],
 DeleteTodoService.new(user: users[2],
                       todo: todo
                       ).call
+
+
+# complete todo
+
+todo = CreateTodoService.new(user: users[2],
+                             project: project,
+                             content: '烧火，配料'
+                             ).call
+
+CompleteTodoService.new(user: users[2],
+                        todo: todo
+                        ).call

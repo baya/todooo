@@ -1,8 +1,9 @@
-class DeleteTodoService
+# -*- coding: utf-8 -*-
+class CompleteTodoService
 
   include TodoTransaction
 
-  ACTION = 'delete_todo'.freeze
+  ACTION = 'complete_todo'.freeze
 
   def initialize(data = {})
     @user    = data[:user]
@@ -12,16 +13,23 @@ class DeleteTodoService
   end
 
   def call
+    check_todo_state
     transaction do
-      delete_todo
+      complete_todo
       create_event
     end
   end
 
   private
 
-  def delete_todo
-    @todo.state = STATE.fetch(:deleted)
+  def check_todo_state
+    if @todo.deleted?
+      raise InvalidStateError.new('不能完成删除状态的todo')
+    end
+  end
+
+  def complete_todo
+    @todo.state = STATE.fetch(:completed)
     @todo.save!
   end
 
@@ -34,5 +42,6 @@ class DeleteTodoService
                   )
   end
 
-  
+
+
 end

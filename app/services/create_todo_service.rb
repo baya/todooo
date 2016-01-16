@@ -1,6 +1,7 @@
 class CreateTodoService
 
-  STATE  = Todo::STATE_MAP
+  include TodoTransaction
+
   ACTION = 'create_todo'.freeze
 
   def initialize(data = {})
@@ -39,8 +40,4 @@ class CreateTodoService
                   )
   end
 
-  def transaction(&block)
-    ActiveRecord::Base.transaction(&block)
-  end
-  
 end

@@ -2,12 +2,12 @@
 class Todo < ActiveRecord::Base
 
   STATE_MAP = {
-    init:      0,
-    running:   1,
-    suspend:   2,
-    completd:  3,
-    deleted:   4,
-    recovered: 5
+    init:       0,
+    running:    1,
+    suspend:    2,
+    completed:  3,
+    deleted:    4,
+    recovered:  5
   }.freeze
 
   STATE_TXT_MAP = {
@@ -29,6 +29,10 @@ class Todo < ActiveRecord::Base
 
   def state_txt
     STATE_TXT_MAP[state]
+  end
+
+  def deleted?
+    state == STATE_MAP.fetch(:deleted)
   end
   
 end
