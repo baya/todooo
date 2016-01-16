@@ -108,3 +108,18 @@ EditTodoDeadlinesService.new(user: users[1],
                           todo: todo,
                           new_deadlines: deadlines
                           ).call
+
+
+# comment todo
+
+todo = CreateTodoService.new(user: users[0],
+                             project: project,
+                             content: '红烧狮子头'
+                             ).call
+
+
+CommentTodoService.new(user: users[1],
+                       todo: todo,
+                       project: project,
+                       content: '我先去弄头狮子'
+                       ).call

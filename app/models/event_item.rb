@@ -28,7 +28,11 @@ class EventItem
            :r_proj_id,
            :r_proj_name,
            :r_team_id,
-           :r_team_name
+           :r_team_name,      # 事件所属的 team
+           :s_cm_id,          # 评论的 id
+           :s_cm_content,     # 评论的内容
+           :s_cm_todo_id,     # 评论的任务的 id
+           :s_cm_todo_content # 评论的任务的内容
           ].freeze
 
   ATTRS.each do |attr|
@@ -83,6 +87,16 @@ class EventItem
     else
       PrettyDay.new(date).to_deadlines
     end
+  end
+
+  # 评论的任务的 url 路径
+  def s_cm_todo_path
+    URL_HELPER.todo_path(r_proj_id, s_cm_todo_id)
+  end
+
+  # 评论的 url 路径
+  def s_cm_path
+    "#{s_cm_todo_path}##{s_cm_id}"
   end
 
   

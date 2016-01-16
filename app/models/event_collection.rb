@@ -43,7 +43,11 @@ class EventCollection
       s_team.name as s_team_name,
       s_team.id as s_team_id,
       r_proj.id as r_proj_id,
-      r_proj.name as r_proj_name
+      r_proj.name as r_proj_name,
+      s_cm.id as s_cm_id,
+      s_cm.content as s_cm_content,
+      s_cm_todo.id as s_cm_todo_id,
+      s_cm_todo.content as s_cm_todo_content
       from events e
       join users u on u.id = e.user_id
       join teams t on t.id = e.team_id
@@ -52,6 +56,8 @@ class EventCollection
       left join todos s_todo on (s_todo.id = e.source_id and e.source_type = 'Todo')
       left join projects s_proj on (s_proj.id = e.source_id and e.source_type = 'Project')
       left join teams s_team on (s_team.id = e.source_id and e.source_type = 'Team')
+      left join comments s_cm on (s_cm.id = e.source_id and e.source_type = 'Comment')
+      left join todos s_cm_todo on (s_cm_todo.id = s_cm.todo_id)
       left join users old_u on (old_u.id = e.old_assigned_user_id)
       left join users new_u on (new_u.id = e.new_assigned_user_id)
       where e.team_id = #{team_id}

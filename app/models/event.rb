@@ -12,7 +12,7 @@ class Event < ActiveRecord::Base
                        :reply_todo_list,     # 回复任务清单
                        :create_todo_list,    # 创建任务清单
                        :move_todo,           # 移动任务
-                       :reply_todo,          # 回复任务
+                       :comment_todo,        # 评论任务
                        :assign_todo,         # 指派任务,
                        :edit_assign_todo,    # 修改任务完成者
                        :create_team,         # 创建了团队

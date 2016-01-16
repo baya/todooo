@@ -1,2 +1,10 @@
 <h2>项目: <%= @project.name %></h2>
 <h2>任务: <%= @todo.content %>, 状态: <%= @todo.state_txt %></h2>
+<h2>截止日期: <%= @todo.deadlines %></h2>
+<h2>下面是评论:</h2>
+<% @todo.comments.order('created_at asc').each do |comment| %>
+  <div class="comment">
+    <%= link_to comment.created_at, "##{comment.id}"%>
+    <p><%= comment.content %></p>
+  </div>
+<% end %>
