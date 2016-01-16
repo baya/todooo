@@ -13,7 +13,7 @@ class CompleteTodoService
   end
 
   def call
-    check_todo_state
+    check_todo_state(:complete)
     transaction do
       complete_todo
       create_event
@@ -21,12 +21,6 @@ class CompleteTodoService
   end
 
   private
-
-  def check_todo_state
-    if @todo.deleted?
-      raise InvalidStateError.new('不能完成删除状态的todo')
-    end
-  end
 
   def complete_todo
     @todo.state = STATE.fetch(:completed)

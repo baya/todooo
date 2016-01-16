@@ -17,7 +17,11 @@
 	    <div class="events-ancestor">
 	      <h5 class="events-ancestor-title"><%= link_to  cate.name, cate.link_path(@team) %></h5>
 	      <% cate.items.each do |item| %>
-		<%= render item.action, item: item %>
+		<% begin %>
+		  <%= render item.action, item: item %>
+		<% rescue ActionView::MissingTemplate => e %>
+		<p><%= "#{e.class}: #{e.message[0..15]}" %></p>
+		<% end %>
 	      <% end %>
 	    </div>
 	  <% end %>

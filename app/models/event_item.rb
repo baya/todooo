@@ -10,6 +10,7 @@ class EventItem
            :new_deadlines,
 	   :resource_type,
            :old_u_name,
+           :new_u_name,
            :new_u_id,
            :user_name,
            :user_id,

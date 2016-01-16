@@ -14,7 +14,9 @@ creator.created_teams << teams
 users = User.create([
                      {name: '掌柜', email: 'zhanggui@mail.com'},
                      {name: '大厨', email: 'dachu@mail.com'},
-                     {name: '小勺', email: 'xiaoshao@mail.com'}
+                     {name: '小勺', email: 'xiaoshao@mail.com'},
+                     {name: '胖厨', email: 'panchu@mail.com'},
+                     {name: '黑锅', email: 'heiguo@mail.com'}
                     ])
 
 team = teams.first
@@ -54,3 +56,16 @@ todo = CreateTodoService.new(user: users[2],
 CompleteTodoService.new(user: users[2],
                         todo: todo
                         ).call
+
+
+# assign todo
+
+todo = CreateTodoService.new(user: users[3],
+                             project: project,
+                             content: '试吃'
+                             ).call
+
+AssignTodoService.new(user: users[3],
+                      assigned_user: users[4],
+                      todo: todo
+                      ).call
