@@ -27,7 +27,7 @@ class EventItem
            :s_team_id,
            :r_proj_id,
            :r_proj_name,
-           :r_team_id,
+           :r_team_id,        # 事件所属的 team 的 id
            :r_team_name,      # 事件所属的 team
            :s_cm_id,          # 评论的 id
            :s_cm_content,     # 评论的内容

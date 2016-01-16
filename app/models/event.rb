@@ -15,8 +15,8 @@ class Event < ActiveRecord::Base
                        :comment_todo,        # 评论任务
                        :assign_todo,         # 指派任务,
                        :edit_assign_todo,    # 修改任务完成者
-                       :create_team,         # 创建了团队
-                       :praise_comment,      # 赞了评论
+                       :create_team,         # 创建团队
+                       :praise_comment,      # 赞评论
                        :delete_comment,      # 删除回复
                        :delete_todo,         # 删除任务
                        :recover_todo,        # 恢复任务

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class EventCategory
 
   InvalidCategoryID = Class.new(StandardError)
@@ -5,18 +6,18 @@ class EventCategory
   
   attr_reader :id
   attr_reader :name
-  attr_reader :resouce
+  attr_reader :resource
   attr_reader :items
 
   def self.create_from_item(item)
     new(item.category_id, item.category_name, item.resource_name, [item])
   end
 
-  def initialize(id, name, resouce, items = [])
-    @id      = id
-    @name    = name
-    @resouce = resouce
-    @items   = items
+  def initialize(id, name, resource, items = [])
+    @id       = id
+    @name     = name
+    @resource = resource
+    @items    = items
   end
 
   def push(item)
@@ -28,7 +29,7 @@ class EventCategory
   end
 
   def access?(item)
-    id == item.category_id ? true : false
+    (id == item.category_id) && ( resource == item.resource_name )
   end
 
   def last_created_at
@@ -45,8 +46,14 @@ class EventCategory
 
   def link_path(team)
     if @link_path.nil?
-      path = "team_#{resouce}_path"
-      @link_path = URL_HELPER.send(path, team.id, id)
+      @link_path = case resource
+      when 'team'
+        URL_HELPER.team_path(team.id)
+      when 'project'
+        URL_HELPER.team_project_path(team.id, id)
+      else
+        raise "非法的资源: #{resource}"
+      end
     end
 
     @link_path

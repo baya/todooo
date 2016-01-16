@@ -47,7 +47,9 @@ class EventCollection
       s_cm.id as s_cm_id,
       s_cm.content as s_cm_content,
       s_cm_todo.id as s_cm_todo_id,
-      s_cm_todo.content as s_cm_todo_content
+      s_cm_todo.content as s_cm_todo_content,
+      r_team.name as r_team_name,
+      r_team.id as r_team_id
       from events e
       join users u on u.id = e.user_id
       join teams t on t.id = e.team_id

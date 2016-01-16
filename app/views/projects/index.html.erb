@@ -1,0 +1,5 @@
+<h2>团队: <%= @team.name %></h2>
+<h2>所有项目:</h2>
+<% @team.projects.each do |proj| %>
+  <p><%= proj.name %></p>
+<% end %>
