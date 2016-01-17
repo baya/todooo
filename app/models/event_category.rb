@@ -58,5 +58,15 @@ class EventCategory
 
     @link_path
   end
-  
+
+  def to_hash_data
+    {
+      id: id,
+      name: name,
+      resource: resource,
+      items_count: items.count,
+      items: items.map(&:to_hash_data)
+    }
+  end
+
 end

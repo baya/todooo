@@ -1,22 +1,33 @@
 # -*- coding: utf-8 -*-
 class EventCollection
 
+  DEFAULT_LIMIT = 50
   include Enumerable
 
   def self.create(params = {})
-    sql  = build_sql(params)
+    team_id  = params[:team_id]
+    user_id  = params[:user_id]
+    limit    = params[:per_page].to_i
+    limit    = DEFAULT_LIMIT if limit <= 0
+    page     = params[:page].to_i
+    page     = 1 if page <= 0
+    offset   = (page - 1) * limit
+    
+    sql  = build_sql(team_id: team_id,
+                     user_id: user_id,
+                     offset: offset,
+                     limit: limit
+                     )
     list = run_sql(sql)
     list = list.map{|attrs| EventItem.new(attrs) }
     new(list)
   end
 
-  def self.create_group_data(params = {})
-    create(params).create_group_data
-  end
-
   def self.build_sql(opts = {})
     team_id = opts[:team_id]
     user_id = opts[:user_id]
+    offset  = opts[:offset]
+    limit   = opts[:limit]
     
     sql = <<-EOF
       select e.created_at as created_at,
@@ -25,6 +36,7 @@ class EventCollection
       e.old_deadlines,
       e.new_deadlines,
       e.resource_type,
+      e.source_type,
       u.name as user_name,
       u.id as user_id,
       e.team_id as team_id,
@@ -49,7 +61,9 @@ class EventCollection
       s_cm_todo.id as s_cm_todo_id,
       s_cm_todo.content as s_cm_todo_content,
       r_team.name as r_team_name,
-      r_team.id as r_team_id
+      r_team.id as r_team_id,
+      t.id as team_id,
+      t.name as team_name
       from events e
       join users u on u.id = e.user_id
       join teams t on t.id = e.team_id
@@ -67,6 +81,7 @@ class EventCollection
 
     sql << ' and e.user_id = #{user_id}' if user_id.present?
     sql << ' order by created_at asc'
+    sql << " limit #{limit} offset #{offset}"
 
     sql
   end
@@ -85,13 +100,20 @@ class EventCollection
     @list.each(&block)
   end
 
-  def create_group_data
+  def to_group_data
     data = {}
     by_created_at_desc = ->(x, y){ y.created_at <=> x.created_at}
     items = sort(&by_created_at_desc)
     items.each {|item| push_to_container(data, item) }
 
     data
+  end
+
+  def to_hash_group_data
+    data = to_group_data
+    h = {}
+    data.each {|day, cates| h[day] = cates.map(&:to_hash_data) }
+    h
   end
 
   private

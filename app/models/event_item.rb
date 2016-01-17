@@ -4,29 +4,29 @@ class EventItem
   URL_HELPER = Rails.application.routes.url_helpers
   
   ATTRS = [
-           :event_id,
-           :created_at,
-           :action,
-           :old_deadlines,
-           :new_deadlines,
-	   :resource_type,
-           :old_u_name,
-           :new_u_name,
-           :new_u_id,
-           :user_name,
-           :user_id,
-           :old_deadlines,
-           :new_deadlines,
-           :user_name,
-           :user_id,
-           :todo_content,
-           :todo_id,
-           :s_proj_name,
-           :s_proj_id,
-           :s_team_name,
-           :s_team_id,
-           :r_proj_id,
-           :r_proj_name,
+           :event_id,         # 事件的 id
+           :created_at,       # 事件的创建时间
+           :action,           # 事件的 action
+           :team_id,          # 事件所属的团队 id
+           :team_name,        # 事件所属的团队名
+           :source_type,      # 事件来源的类型
+	   :resource_type,    # 事件所属的资源的类型
+           :old_u_id,         # 事件的 todo 的旧的指派者的 id
+           :old_u_name,       # 事件的 todo 的旧的指派者的 name
+           :new_u_name,       # 事件的 todo 的新的指派者的 name
+           :new_u_id,         # 事件的 todo 的新的指派者的 id
+           :old_deadlines,    # 事件的 todo 的旧的截止日期
+           :new_deadlines,    # 事件的 todo 的新的截止日期
+           :user_name,        # 事件的触发者的 name
+           :user_id,          # 事件的触发者的 id
+           :todo_content,     # 事件来源的 todo 的内容
+           :todo_id,          # 事件来源的 todo 的 id
+           :s_proj_name,      # 事件来源的 project 的 name
+           :s_proj_id,        # 事件来源的 project 的 id
+           :s_team_name,      # 事件来源的 team 的 name
+           :s_team_id,        # 事件来源的 team 的 id
+           :r_proj_id,        # 事件所属的 project 的 id
+           :r_proj_name,      # 事件所属的 project 的 name
            :r_team_id,        # 事件所属的 team 的 id
            :r_team_name,      # 事件所属的 team
            :s_cm_id,          # 评论的 id
@@ -97,6 +97,16 @@ class EventItem
   # 评论的 url 路径
   def s_cm_path
     "#{s_cm_todo_path}##{s_cm_id}"
+  end
+
+  def to_hash_data
+    h = {}
+    ATTRS.each do |attr|
+      h[attr] = send(attr)
+    end
+    h['created_hm'] = created_hm
+
+    h
   end
 
   
