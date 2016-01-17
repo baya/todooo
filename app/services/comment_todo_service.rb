@@ -4,6 +4,8 @@ class CommentTodoService
 
   ACTION = 'comment_todo'.freeze
 
+  attr_reader :event
+
   def initialize(data = {})
     @user    = data[:user]
     @todo    = data[:todo]
@@ -15,7 +17,7 @@ class CommentTodoService
   def call
     transaction do
       comment = create_comment
-      create_event(comment)
+      @event = create_event(comment)
 
       comment
     end

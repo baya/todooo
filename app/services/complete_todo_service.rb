@@ -5,6 +5,8 @@ class CompleteTodoService
 
   ACTION = 'complete_todo'.freeze
 
+  attr_reader :event
+
   def initialize(data = {})
     @user    = data[:user]
     @todo    = data[:todo]
@@ -16,7 +18,7 @@ class CompleteTodoService
     check_todo_state(:complete)
     transaction do
       complete_todo
-      create_event
+      @event = create_event
     end
   end
 

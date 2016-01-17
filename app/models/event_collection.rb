@@ -80,7 +80,7 @@ class EventCollection
     EOF
 
     sql << ' and e.user_id = #{user_id}' if user_id.present?
-    sql << ' order by created_at asc'
+    sql << ' order by created_at desc'
     sql << " limit #{limit} offset #{offset}"
 
     sql
@@ -102,9 +102,9 @@ class EventCollection
 
   def to_group_data
     data = {}
-    by_created_at_desc = ->(x, y){ y.created_at <=> x.created_at}
-    items = sort(&by_created_at_desc)
-    items.each {|item| push_to_container(data, item) }
+    # by_created_at_desc = ->(x, y){ y.created_at <=> x.created_at}
+    # items = sort(&by_created_at_desc)
+    each {|item| push_to_container(data, item) }
 
     data
   end
@@ -128,17 +128,9 @@ class EventCollection
     day = item.created_date
     data[day] ||= []
     cate = data[day].detect {|cate|
-      match_cate = cate.access?(item)
-      
       index = data[day].index(cate)
       next_cate = data[day][index + 1]
-      if next_cate.nil?
-        match_time = true
-      else
-        match_time = next_cate.more_last_than?(item)
-      end
-
-      match_cate && match_time
+      cate.access?(item) && next_cate.nil?
     }
 
     if cate

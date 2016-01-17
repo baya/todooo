@@ -3,6 +3,7 @@ class DeleteTodoService
   include TodoTransaction
 
   ACTION = 'delete_todo'.freeze
+  attr_reader :event
 
   def initialize(data = {})
     @user    = data[:user]
@@ -14,7 +15,7 @@ class DeleteTodoService
   def call
     transaction do
       delete_todo
-      create_event
+      @event = create_event
     end
   end
 

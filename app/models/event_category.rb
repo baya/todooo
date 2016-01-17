@@ -32,18 +32,6 @@ class EventCategory
     (id == item.category_id) && ( resource == item.resource_name )
   end
 
-  def last_created_at
-    @items.sort_by(&:created_at).first.try(:created_at)
-  end
-
-  def more_last_than?(item)
-    if last_created_at.nil?
-      false
-    else
-      last_created_at > item.created_at ? true : false
-    end
-  end
-
   def link_path(team)
     if @link_path.nil?
       @link_path = case resource

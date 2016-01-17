@@ -4,6 +4,8 @@ class CreateTodoService
 
   ACTION = 'create_todo'.freeze
 
+  attr_reader :event
+
   def initialize(data = {})
     @content   = data[:content]
     @user      = data[:user]
@@ -15,7 +17,7 @@ class CreateTodoService
   def call
     transaction do
       todo = create_todo
-      create_event(todo)
+      @event = create_event(todo)
 
       todo
     end

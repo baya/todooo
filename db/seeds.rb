@@ -23,7 +23,7 @@ users = User.create([
 team.members << users
 
 # create project
-project = CreateProjectService.new(user: users[4],
+h_project = CreateProjectService.new(user: users[4],
                                    team: team,
                                    name: '胡吃海喝').call
 
@@ -40,7 +40,6 @@ CreateTodoService.new(user: users[0],
                       content: '辣椒炒肉'
                       ).call
 
-
 # delete todo
 
 todo = CreateTodoService.new(user: users[1],
@@ -52,17 +51,57 @@ DeleteTodoService.new(user: users[2],
                       todo: todo
                       ).call
 
+# 插入其他项目的 todo
 
-# complete todo
+service = CreateTodoService.new(user: users[0],
+                                project: h_project,
+                                content: '好酒好肉伺候'
+                                )
 
-todo = CreateTodoService.new(user: users[2],
+h_todo = service.call
+event = service.event
+todo.created_at = todo.updated_at = DateTime.now + 5.minutes
+event.created_at = event.updated_at = DateTime.now + 5.minutes
+todo.save
+event.save
+
+
+
+# complete todo 打乱时间
+
+service = CreateTodoService.new(user: users[2],
                              project: project,
                              content: '烧火，配料'
-                             ).call
+                             )
 
-CompleteTodoService.new(user: users[2],
+todo = service.call
+event = service.event
+
+todo.created_at = todo.updated_at = DateTime.now + 10.minutes
+event.created_at = event.updated_at = DateTime.now + 10.minutes
+todo.save
+event.save
+
+
+service = CompleteTodoService.new(user: users[2],
                         todo: todo
-                        ).call
+                        )
+
+service.call
+event = service.event
+
+event.created_at = event.updated_at = DateTime.now + 15.minutes
+todo.save
+event.save
+
+
+service = DeleteTodoService.new(user: users[2],
+                                todo: h_todo
+                                )
+service.call
+event = service.event
+event.created_at = event.updated_at = DateTime.now + 7.minutes
+event.save
 
 
 # assign todo
@@ -117,6 +156,13 @@ EditTodoDeadlinesService.new(user: users[1],
                           ).call
 
 
+deadlines = (DateTime.now + 3.day).strftime('%Y-%m-%d')
+EditTodoDeadlinesService.new(user: users[2],
+                          todo: todo,
+                          new_deadlines: deadlines
+                          ).call
+
+
 # comment todo
 
 todo = CreateTodoService.new(user: users[0],
@@ -130,3 +176,45 @@ CommentTodoService.new(user: users[1],
                        project: project,
                        content: '我先去弄头狮子'
                        ).call
+
+
+# 昨天的 todo
+
+service = CreateTodoService.new(user: users[2],
+                                project: project,
+                                content: '剁椒鱼头'
+                                )
+
+todo = service.call
+event = service.event
+todo.created_at = todo.updated_at = DateTime.now - 1.day
+todo.save
+event.created_at = event.updated_at = DateTime.now - 1.day
+event.save
+
+
+# 前天的 events
+
+service = CreateProjectService.new(user: users[3],
+                                   team: team,
+                                   name: '能吃是福'
+                                   )
+
+project = service.call
+event = service.event
+
+project.created_at = project.updated_at = DateTime.now - 2.days
+event.created_at = event.updated_at = DateTime.now - 2.days
+project.save
+event.save
+
+service = CreateTodoService.new(user: users[3],
+                                project: project,
+                                content: '蒸蛋'
+                                )
+todo = service.call
+event = service.event
+todo.created_at = todo.updated_at = DateTime.now - 2.day
+todo.save
+event.created_at = event.updated_at = DateTime.now - 2.day
+event.save
