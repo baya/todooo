@@ -178,19 +178,6 @@ CommentTodoService.new(user: users[1],
                        ).call
 
 
-# 昨天的 todo
-
-service = CreateTodoService.new(user: users[2],
-                                project: project,
-                                content: '剁椒鱼头'
-                                )
-
-todo = service.call
-event = service.event
-todo.created_at = todo.updated_at = DateTime.now - 1.day
-todo.save
-event.created_at = event.updated_at = DateTime.now - 1.day
-event.save
 
 
 # 前天的 events
@@ -217,4 +204,19 @@ event = service.event
 todo.created_at = todo.updated_at = DateTime.now - 2.day
 todo.save
 event.created_at = event.updated_at = DateTime.now - 2.day
+event.save
+
+
+# 昨天的 todo
+
+service = CreateTodoService.new(user: users[2],
+                                project: project,
+                                content: '剁椒鱼头'
+                                )
+
+todo = service.call
+event = service.event
+todo.created_at = todo.updated_at = DateTime.now - 1.day
+todo.save
+event.created_at = event.updated_at = DateTime.now - 1.day
 event.save
