@@ -40,7 +40,7 @@ class EventCategory
     if last_created_at.nil?
       false
     else
-      last_created_at > item.create_at ? true : false
+      last_created_at > item.created_at ? true : false
     end
   end
 

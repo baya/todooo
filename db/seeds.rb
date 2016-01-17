@@ -8,6 +8,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 creator = User.create({name: 'tank', email: 'tank7@mail.com'})
+
+# create team
 team = CreateTeamService.new(user: creator, name: '吃货').call
 
 users = User.create([
@@ -20,7 +22,14 @@ users = User.create([
 
 team.members << users
 
-project = creator.created_projects.create(team: team, name: '做好吃的')
+# create project
+project = CreateProjectService.new(user: users[4],
+                                   team: team,
+                                   name: '胡吃海喝').call
+
+project = CreateProjectService.new(user: users[0],
+                                   team: team,
+                                   name: '做好吃的').call
 project.members << users
 
 
