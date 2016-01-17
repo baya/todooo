@@ -78,7 +78,7 @@ class PrettyDay
     elsif is_in_year?
       @day.strftime('%-m月%-d日')
     else
-      @day.strftime('%Y年%-m月-%d日')
+      @day.strftime('%Y年%-m月%-d日')
     end
   end
 
