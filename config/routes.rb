@@ -9,5 +9,7 @@ Rails.application.routes.draw do
   scope '/projects/:project_id' do
     resources :todos
   end
+
+  root to: 'home#index'
   
 end

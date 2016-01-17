@@ -9,8 +9,14 @@
 
 creator = User.create({name: 'tank', email: 'tank7@mail.com'})
 
-# create team
-team = CreateTeamService.new(user: creator, name: '吃货').call
+# create team, 4 天以前
+service = CreateTeamService.new(user: creator, name: '吃货')
+team = service.call
+team.created_at = team.updated_at = DateTime.now - 4.days
+event = service.event
+event.created_at = event.updated_at = DateTime.now - 4.days
+team.save
+event.save
 
 users = User.create([
                      {name: '掌柜', email: 'zhanggui@mail.com'},

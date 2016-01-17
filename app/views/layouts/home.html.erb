@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TwEvents</title>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <div class="wrapper">
+    <div class="header">
+    <div class="container workspace simple-stack">
+      <%= yield %>
+    </div>
+  </div>
+
+</body>
+</html>

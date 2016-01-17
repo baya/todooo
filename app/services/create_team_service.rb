@@ -2,6 +2,8 @@ class CreateTeamService
 
   ACTION = 'create_team'.freeze
 
+  attr_reader :event
+
   def initialize(data = {})
     @user = data[:user]
     @name = data[:name]
@@ -10,7 +12,7 @@ class CreateTeamService
   def call
     transaction do
       team = create_team
-      create_event(team)
+      @event = create_event(team)
 
       team
     end
