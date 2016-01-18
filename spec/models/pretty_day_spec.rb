@@ -67,11 +67,17 @@ RSpec.describe PrettyDay, :type => :model do
     pday = PrettyDay.new(day)
     assert_equal pday.to_deadlines, '明天'
 
+    # 一周内
+    day = (DateTime.now + 2.day).strftime('%Y-%m-%d')
+    pday = PrettyDay.new(day)
+    assert pday.to_deadlines.include?('本周')
+    
+
     # 一年内
     tday = DateTime.now
-    day = (tday + 5.day).strftime('%Y-%m-%d')
+    day = (tday + 10.day).strftime('%Y-%m-%d')
     pday = PrettyDay.new(day)
-    assert_equal pday.to_deadlines, (tday + 5.day).strftime('%-m月%-d日')
+    assert_equal pday.to_deadlines, (tday + 10.day).strftime('%-m月%-d日')
 
     # 一年外
     day = '2015-09-07'

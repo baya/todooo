@@ -124,10 +124,10 @@ class EventCollection
   def push_to_container(data, item)
     day = item.created_date
     data[day] ||= []
-    cate = data[day].detect {|cate|
-      index = data[day].index(cate)
-      next_cate = data[day][index + 1]
-      cate.access?(item) && next_cate.nil?
+    cate = data[day].detect {|categ|
+      index = data[day].index(categ)
+      next_categ = data[day][index + 1]
+      categ.access?(item) && next_categ.nil?
     }
 
     if cate

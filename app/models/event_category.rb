@@ -14,10 +14,11 @@ class EventCategory
   end
 
   def initialize(id, name, resource, items = [])
-    @id       = id
-    @name     = name
-    @resource = resource
-    @items    = items
+    @id        = id
+    @name      = name
+    @resource  = resource
+    @items     = items
+    @link_path = nil
   end
 
   def push(item)
