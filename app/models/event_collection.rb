@@ -102,10 +102,7 @@ class EventCollection
 
   def to_group_data
     data = {}
-    # by_created_at_desc = ->(x, y){ y.created_at <=> x.created_at}
-    # items = sort(&by_created_at_desc)
     each {|item| push_to_container(data, item) }
-
     data
   end
 
