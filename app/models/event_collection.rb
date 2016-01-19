@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 class EventCollection
 
-  DEFAULT_LIMIT = 50
   include Enumerable
+  DEFAULT_LIMIT = 50
 
   def self.create(params = {})
     team_id  = params[:team_id]
